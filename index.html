@@ -105,7 +105,7 @@
             box-shadow: 0 0 20px rgba(100, 255, 218, 0.2);
         }
 
-        /* ----- HERO — картинка почти на всю ширину, яркая ----- */
+        /* ----- HERO — картинка привязана к левому краю, яркая ----- */
         .hero {
             padding: 80px 0 60px;
             position: relative;
@@ -119,28 +119,28 @@
             content: '';
             position: absolute;
             top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 95%;            /* почти вся ширина */
-            height: 95%;
+            left: 0;
+            transform: translateY(-50%);
+            width: 75%;            /* занимает 75% ширины, не заходит на текст */
+            height: 90%;
             background-image: url('images/gpt-image-2_Futuristic_digital_artwork_symbolizing_enterprise_integration_a_massive_luminous-0.jpg');
             background-size: contain;
             background-repeat: no-repeat;
-            background-position: center;
-            opacity: 0.55;          /* ярче */
+            background-position: left center;
+            opacity: 0.85;          /* очень яркая */
             z-index: 0;
-            filter: brightness(1.2) contrast(1.1); /* дополнительная яркость */
+            filter: brightness(1.1) contrast(1.05);
         }
 
+        /* Лёгкая вуаль только там, где текст, чтобы он читался */
         .hero::after {
             content: '';
             position: absolute;
             top: 0;
-            left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(135deg, rgba(10, 25, 47, 0.6) 0%, rgba(10, 25, 47, 0.15) 100%);
-            /* вуаль ослаблена */
+            width: 60%;            /* вуаль только на правой половине */
+            background: linear-gradient(to right, rgba(10, 25, 47, 0.0) 0%, rgba(10, 25, 47, 0.6) 100%);
             z-index: 1;
         }
 
@@ -167,7 +167,7 @@
 
         .hero-text p {
             font-size: 1.2rem;
-            color: #8892b0;
+            color: #e0e8f0; /* чуть светлее для контраста на фоне */
             max-width: 560px;
             margin-bottom: 32px;
         }
@@ -482,6 +482,7 @@
             padding-top: 24px;
         }
 
+        /* ----- Адаптивность ----- */
         @media (max-width: 1024px) {
             .hero .container {
                 grid-template-columns: 1fr;
@@ -495,6 +496,16 @@
             }
             .hero-text .buttons {
                 justify-content: center;
+            }
+            .hero::before {
+                width: 100%;
+                height: 100%;
+                background-position: center;
+                opacity: 0.3;
+            }
+            .hero::after {
+                width: 100%;
+                background: linear-gradient(135deg, rgba(10, 25, 47, 0.7) 0%, rgba(10, 25, 47, 0.3) 100%);
             }
         }
 
@@ -513,6 +524,10 @@
             .hero-text h1 {
                 font-size: 2.2rem;
             }
+            .hero-text p {
+                font-size: 1rem;
+                color: #ccd6f6;
+            }
             .section-title {
                 font-size: 1.8rem;
             }
@@ -523,20 +538,11 @@
             .benefits-list {
                 grid-template-columns: 1fr;
             }
-            .hero::before {
-                width: 100%;
-                height: 100%;
-                opacity: 0.4;
-                filter: brightness(1.1) contrast(1.05);
-            }
         }
 
         @media (max-width: 480px) {
             .hero-text h1 {
                 font-size: 1.8rem;
-            }
-            .hero-text p {
-                font-size: 1rem;
             }
             .btn-primary,
             .btn-secondary {
@@ -548,9 +554,6 @@
             .contacts {
                 flex-direction: column;
                 gap: 16px;
-            }
-            .hero::before {
-                opacity: 0.35;
             }
         }
     </style>
