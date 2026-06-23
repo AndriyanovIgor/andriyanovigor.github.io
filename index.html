@@ -25,6 +25,7 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 24px;
+            position: relative; /* для позиционирования фона внутри */
         }
 
         /* ----- ШАПКА ----- */
@@ -105,7 +106,7 @@
             box-shadow: 0 0 20px rgba(100, 255, 218, 0.2);
         }
 
-        /* ----- HERO — картинка привязана к правому краю, яркая ----- */
+        /* ----- HERO с картинкой внутри контейнера ----- */
         .hero {
             padding: 80px 0 60px;
             position: relative;
@@ -113,35 +114,37 @@
             min-height: 80vh;
             display: flex;
             align-items: center;
+            background: #0a192f; /* чтобы не было просветов */
         }
 
-        .hero::before {
-            content: '';
+        /* Фоновая картинка — внутри контейнера */
+        .hero-bg {
             position: absolute;
             top: 50%;
             right: 0;
             transform: translateY(-50%);
-            width: 75%;            /* занимает 75% ширины */
+            width: 60%;            /* занимает 60% ширины контейнера */
             height: 90%;
             background-image: url('images/gpt-image-2_Futuristic_digital_artwork_symbolizing_enterprise_integration_a_massive_luminous-0.jpg');
             background-size: contain;
             background-repeat: no-repeat;
             background-position: right center;
-            opacity: 0.85;          /* яркая */
-            z-index: 0;
+            opacity: 0.85;
             filter: brightness(1.1) contrast(1.05);
+            z-index: 0;
+            pointer-events: none; /* чтобы не мешать кликам */
         }
 
-        /* Лёгкая вуаль только слева, чтобы текст читался */
-        .hero::after {
-            content: '';
+        /* Лёгкая вуаль слева, чтобы текст читался (опционально) */
+        .hero-vignette {
             position: absolute;
             top: 0;
             left: 0;
             bottom: 0;
-            width: 60%;
-            background: linear-gradient(to right, rgba(10, 25, 47, 0.0) 0%, rgba(10, 25, 47, 0.6) 100%);
+            width: 50%;
+            background: linear-gradient(to right, rgba(10, 25, 47, 0.0) 0%, rgba(10, 25, 47, 0.4) 100%);
             z-index: 1;
+            pointer-events: none;
         }
 
         .hero .container {
@@ -167,7 +170,7 @@
 
         .hero-text p {
             font-size: 1.2rem;
-            color: #e0e8f0; /* светлее для контраста на фоне */
+            color: #e0e8f0;
             max-width: 560px;
             margin-bottom: 32px;
         }
@@ -498,15 +501,15 @@
             .hero-text .buttons {
                 justify-content: center;
             }
-            .hero::before {
+            .hero-bg {
                 width: 100%;
                 height: 100%;
                 background-position: center;
                 opacity: 0.3;
+                filter: none;
             }
-            .hero::after {
-                width: 100%;
-                background: linear-gradient(135deg, rgba(10, 25, 47, 0.7) 0%, rgba(10, 25, 47, 0.3) 100%);
+            .hero-vignette {
+                display: none;
             }
         }
 
@@ -573,6 +576,11 @@
     </header>
 
     <section class="hero">
+        <!-- Фоновая картинка (внутри контейнера) -->
+        <div class="hero-bg"></div>
+        <!-- Лёгкая вуаль слева -->
+        <div class="hero-vignette"></div>
+
         <div class="container">
             <div class="hero-text">
                 <h1>Бизнес-аналитик <span>1С:ERP</span><br />Архитектор интеграций</h1>
@@ -588,6 +596,7 @@
         </div>
     </section>
 
+    <!-- Остальные секции без изменений ... -->
     <section id="services">
         <div class="container">
             <h2 class="section-title">Мои услуги</h2>
