@@ -362,6 +362,7 @@
             margin: 0 auto 20px;
         }
 
+        /* ----- Преимущества (переименованный блок) ----- */
         .benefits-list {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -418,6 +419,93 @@
             border-color: #64ffda;
             color: #64ffda;
             transform: translateY(-2px);
+        }
+
+        /* ----- Стоимость (новый раздел) ----- */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .pricing-card {
+            background: rgba(17, 34, 64, 0.6);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(100, 255, 218, 0.1);
+            border-radius: 16px;
+            padding: 32px 24px;
+            text-align: center;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-6px);
+            border-color: #64ffda;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .pricing-card .plan-name {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #ccd6f6;
+            margin-bottom: 8px;
+        }
+
+        .pricing-card .plan-price {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #64ffda;
+            margin: 16px 0 8px;
+        }
+
+        .pricing-card .plan-duration {
+            font-size: 0.9rem;
+            color: #8892b0;
+            margin-bottom: 20px;
+        }
+
+        .pricing-card .plan-features {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 24px;
+            flex-grow: 1;
+        }
+
+        .pricing-card .plan-features li {
+            padding: 6px 0;
+            font-size: 0.95rem;
+            color: #8892b0;
+            border-bottom: 1px solid rgba(100, 255, 218, 0.05);
+        }
+
+        .pricing-card .plan-features li:last-child {
+            border-bottom: none;
+        }
+
+        .pricing-card .btn-primary {
+            width: 100%;
+            text-align: center;
+            padding: 12px 0;
+            font-size: 0.95rem;
+        }
+
+        .pricing-note {
+            text-align: center;
+            margin-top: 32px;
+            font-size: 1rem;
+            color: #64ffda;
+            background: rgba(100, 255, 218, 0.05);
+            padding: 16px 24px;
+            border-radius: 12px;
+            border: 1px solid rgba(100, 255, 218, 0.1);
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .about-text {
@@ -535,7 +623,8 @@
                 font-size: 1.8rem;
             }
             .services-grid,
-            .cases-grid {
+            .cases-grid,
+            .pricing-grid {
                 grid-template-columns: 1fr;
             }
             .benefits-list {
@@ -569,7 +658,9 @@
             <nav>
                 <a href="#services">Услуги</a>
                 <a href="#cases">Типовые потоки</a>
-                <a href="#tech-stack">Технологический стек</a> <!-- новая ссылка -->
+                <a href="#benefits">Преимущества</a>
+                <a href="#tech-stack">Технологический стек</a>
+                <a href="#pricing">Цены</a>
                 <a href="#contacts">Контакты</a>
                 <a href="#contacts" class="btn-outline">Связаться</a>
             </nav>
@@ -678,9 +769,10 @@
         </div>
     </section>
 
+    <!-- ===== РАЗДЕЛ "ПРЕИМУЩЕСТВА" (переименован) ===== -->
     <section id="benefits">
         <div class="container">
-            <h2 class="section-title">Что вы получаете, заказывая ТЗ у меня</h2>
+            <h2 class="section-title">Преимущества</h2>
             <div class="benefits-list">
                 <div class="item"><span class="icon">✓</span> Предсказуемый бюджет — разработчик оценивает по готовому ТЗ</div>
                 <div class="item"><span class="icon">✓</span> Сокращение сроков на 30–50 % — без постоянных уточнений</div>
@@ -691,8 +783,56 @@
         </div>
     </section>
 
-    <!-- ===== Секция "Технологический стек" (добавлен id) ===== -->
-    <section id="tech-stack" style="background: rgba(10, 25, 47, 0.5);">
+    <!-- ===== РАЗДЕЛ "ЦЕНЫ" (новый) ===== -->
+    <section id="pricing" style="background: rgba(10, 25, 47, 0.5);">
+        <div class="container">
+            <h2 class="section-title">Стоимость услуг</h2>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="plan-name">Простое ТЗ</div>
+                    <div class="plan-price">от 15 000 ₽</div>
+                    <div class="plan-duration">3–5 дней</div>
+                    <ul class="plan-features">
+                        <li>XLS-обмен</li>
+                        <li>Маппинг до 15 полей</li>
+                        <li>Базовые алгоритмы</li>
+                        <li>Контрольный пример</li>
+                    </ul>
+                    <a href="#contacts" class="btn-primary">Заказать</a>
+                </div>
+                <div class="pricing-card">
+                    <div class="plan-name">Среднее ТЗ</div>
+                    <div class="plan-price">от 20 000 ₽</div>
+                    <div class="plan-duration">5–7 дней</div>
+                    <ul class="plan-features">
+                        <li>JSON / REST API</li>
+                        <li>Проверки и логирование</li>
+                        <li>Регламентные задания</li>
+                        <li>Протокол ошибок</li>
+                    </ul>
+                    <a href="#contacts" class="btn-primary">Заказать</a>
+                </div>
+                <div class="pricing-card">
+                    <div class="plan-name">Сложное ТЗ</div>
+                    <div class="plan-price">от 25 000 ₽</div>
+                    <div class="plan-duration">7–10 дней</div>
+                    <ul class="plan-features">
+                        <li>XML + XSD-схема</li>
+                        <li>Сложные алгоритмы</li>
+                        <li>Интеграция с WMS/CRM</li>
+                        <li>Полный цикл обмена</li>
+                    </ul>
+                    <a href="#contacts" class="btn-primary">Заказать</a>
+                </div>
+            </div>
+            <div class="pricing-note">
+                📦 При заказе пакета из 3 и более кейсов — скидка 15–20%
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ТЕХНОЛОГИЧЕСКИЙ СТЕК ===== -->
+    <section id="tech-stack">
         <div class="container">
             <h2 class="section-title">Технологический стек</h2>
             <div class="tech-stack">
