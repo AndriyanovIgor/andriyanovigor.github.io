@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Игорь Андриянов — Бизнес-аналитик 1С:ERP</title>
+    <style>
+        /* ----- Импорт шрифта ----- */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap');
+
+        /* ----- Сброс и общие стили ----- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #0a192f;
+            color: #ccd6f6;
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ----- ШАПКА (тёмная, как на softmax.world) ----- */
+        header {
+            background: rgba(10, 25, 47, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 16px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(100, 255, 218, 0.1);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #64ffda;
+            letter-spacing: -0.02em;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: #8892b0;
+            font-size: 0.95rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #64ffda;
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #64ffda;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .btn-outline {
+            border: 1px solid #64ffda;
+            color: #64ffda;
+            padding: 8px 20px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background: rgba(100, 255, 218, 0.1);
+            box-shadow: 0 0 20px rgba(100, 255, 218, 0.2);
+        }
+
+        /* ----- HERO (с фоном-картинкой) ----- */
+        .hero {
+            padding: 80px 0 60px;
+            position: relative;
+            overflow: hidden;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Фоновое изображение с затемнением */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('images/integration-scheme.jpg');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.15;
+            z-index: 0;
+        }
+
+        /* Дополнительная тёмная вуаль для читаемости текста */
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(10, 25, 47, 0.92) 0%, rgba(10, 25, 47, 0.6) 100%);
+            z-index: 1;
+        }
+
+        .hero .container {
+            position: relative;
+            z-index: 2;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 60px;
+        }
+
+        .hero-text h1 {
+            font-size: 3.2rem;
+            font-weight: 700;
+            color: #ccd6f6;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .hero-text h1 span {
+            color: #64ffda;
+        }
+
+        .hero-text p {
+            font-size: 1.2rem;
+            color: #8892b0;
+            max-width: 560px;
+            margin-bottom: 32px;
+        }
+
+        .hero-text .buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .btn-primary {
+            background: #64ffda;
+            color: #0a192f;
+            padding: 14px 34px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .btn-primary:hover {
+            background: #4cd8b5;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(100, 255, 218, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #64ffda;
+            padding: 14px 34px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 1rem;
+            border: 1px solid #64ffda;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(100, 255, 218, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* ----- Общие стили для секций ----- */
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            text-align: center;
+            color: #ccd6f6;
+            margin-bottom: 48px;
+            letter-spacing: -0.02em;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: #64ffda;
+            margin: 12px auto 0;
+            border-radius: 2px;
+        }
+
+        /* ----- Услуги (карточки с эффектом стекла) ----- */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: rgba(17, 34, 64, 0.6);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(100, 255, 218, 0.1);
+            border-radius: 12px;
+            padding: 32px 28px;
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(100, 255, 218, 0.3);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .service-card h3 {
+            font-size: 1.3rem;
+            color: #64ffda;
+            margin-bottom: 14px;
+        }
+
+        .service-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .service-card ul li {
+            padding: 6px 0 6px 28px;
+            position: relative;
+            font-size: 0.95rem;
+            color: #8892b0;
+        }
+
+        .service-card ul li::before {
+            content: "▹";
+            color: #64ffda;
+            position: absolute;
+            left: 0;
+            font-size: 1.1rem;
+        }
+
+        /* ----- Типовые потоки (карточки) ----- */
+        .cases-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .case-card {
+            background: rgba(17, 34, 64, 0.6);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(100, 255, 218, 0.08);
+            border-left: 4px solid #64ffda;
+            border-radius: 8px;
+            padding: 22px 24px;
+            transition: all 0.3s ease;
+        }
+
+        .case-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(100, 255, 218, 0.2);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .case-card .case-title {
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: #ccd6f6;
+        }
+
+        .case-card .case-meta {
+            font-size: 0.8rem;
+            color: #64ffda;
+            margin: 6px 0 8px;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+        }
+
+        .case-card .case-desc {
+            font-size: 0.95rem;
+            color: #8892b0;
+            margin: 0;
+        }
+
+        .case-card .case-desc strong {
+            color: #ccd6f6;
+            font-weight: 600;
+        }
+
+        .case-card .case-desc em {
+            color: #64ffda;
+            font-style: italic;
+        }
+
+        /* Блок запроса примеров ТЗ */
+        .request-block {
+            text-align: center;
+            margin-top: 48px;
+            padding: 32px 20px;
+            background: rgba(17, 34, 64, 0.6);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 12px;
+            border: 1px solid rgba(100, 255, 218, 0.1);
+        }
+
+        .request-block p {
+            font-size: 1.15rem;
+            color: #ccd6f6;
+            max-width: 700px;
+            margin: 0 auto 20px;
+        }
+
+        .request-block .btn-primary {
+            padding: 12px 36px;
+        }
+
+        /* ----- Преимущества ----- */
+        .benefits-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        .benefits-list .item {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            font-size: 1rem;
+            color: #8892b0;
+            padding: 16px 20px;
+            background: rgba(17, 34, 64, 0.4);
+            border-radius: 8px;
+            border: 1px solid rgba(100, 255, 218, 0.06);
+        }
+
+        .benefits-list .item .icon {
+            color: #64ffda;
+            font-weight: 700;
+            font-size: 1.4rem;
+            line-height: 1.2;
+            min-width: 24px;
+        }
+
+        /* ----- Технологический стек ----- */
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 16px 24px;
+            padding: 32px 24px;
+            background: rgba(17, 34, 64, 0.4);
+            border-radius: 12px;
+            border: 1px solid rgba(100, 255, 218, 0.06);
+            margin-top: 10px;
+        }
+
+        .tech-stack span {
+            font-size: 0.9rem;
+            color: #8892b0;
+            background: rgba(255, 255, 255, 0.04);
+            padding: 8px 22px;
+            border-radius: 20px;
+            border: 1px solid rgba(100, 255, 218, 0.08);
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .tech-stack span:hover {
+            border-color: #64ffda;
+            color: #64ffda;
+            transform: translateY(-2px);
+        }
+
+        /* ----- Обо мне ----- */
+        .about-text {
+            max-width: 760px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            text-align: center;
+            color: #8892b0;
+            line-height: 1.7;
+        }
+
+        .about-text strong {
+            color: #ccd6f6;
+        }
+
+        /* ----- Футер (тёмный) ----- */
+        footer {
+            background: #0a192f;
+            border-top: 1px solid rgba(100, 255, 218, 0.06);
+            padding: 56px 0 32px;
+        }
+
+        footer .container {
+            text-align: center;
+        }
+
+        footer h2 {
+            font-size: 2rem;
+            color: #ccd6f6;
+            margin-bottom: 24px;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+
+        .contacts {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 32px 48px;
+            margin: 24px 0 32px;
+        }
+
+        .contacts a {
+            color: #8892b0;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 4px 0;
+            border-bottom: 1px solid transparent;
+        }
+
+        .contacts a:hover {
+            color: #64ffda;
+            border-bottom-color: #64ffda;
+        }
+
+        footer .btn-primary {
+            padding: 14px 44px;
+        }
+
+        .footer-copy {
+            margin-top: 36px;
+            font-size: 0.85rem;
+            color: #495670;
+            border-top: 1px solid rgba(100, 255, 218, 0.06);
+            padding-top: 24px;
+        }
+
+        /* ----- Адаптивность ----- */
+        @media (max-width: 1024px) {
+            .hero .container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                text-align: center;
+            }
+
+            .hero-text p {
+                max-width: 100%;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-text .buttons {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+            }
+
+            nav {
+                justify-content: center;
+                gap: 16px;
+            }
+
+            .hero {
+                padding: 60px 0 40px;
+                min-height: auto;
+            }
+
+            .hero-text h1 {
+                font-size: 2.2rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .services-grid,
+            .cases-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .benefits-list {
+                grid-template-columns: 1fr;
+            }
+
+            .request-block p {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-text h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero-text p {
+                font-size: 1rem;
+            }
+
+            .btn-primary,
+            .btn-secondary {
+                padding: 12px 24px;
+                font-size: 0.9rem;
+                width: 100%;
+                text-align: center;
+            }
+
+            .contacts {
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            .request-block {
+                padding: 24px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== ШАПКА ===== -->
+    <header>
+        <div class="container">
+            <div class="logo">Игорь Андриянов</div>
+            <nav>
+                <a href="#services">Услуги</a>
+                <a href="#cases">Типовые потоки</a>
+                <a href="#contacts">Контакты</a>
+                <a href="#contacts" class="btn-outline">Связаться</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-text">
+                <h1>Бизнес-аналитик <span>1С:ERP</span><br />Архитектор интеграций</h1>
+                <p>
+                    Проектирую обмены данными между 1С:ERP и внешними системами (CRM, WMS, сайты).
+                    Разрабатываю ТЗ, которые сокращают сроки разработки на 30–50 %.
+                </p>
+                <div class="buttons">
+                    <a href="#cases" class="btn-primary">Смотреть типовые потоки</a>
+                    <a href="#contacts" class="btn-secondary">Связаться</a>
+                </div>
+            </div>
+            <!-- Правая колонка оставлена пустой, так как фон уже содержит картинку -->
+        </div>
+    </section>
+
+    <!-- ===== УСЛУГИ ===== -->
+    <section id="services">
+        <div class="container">
+            <h2 class="section-title">Мои услуги</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>📄 Технические задания (ТЗ)</h3>
+                    <ul>
+                        <li>Анализирую бизнес-задачу и источники данных</li>
+                        <li>Проектирую структуру обмена (XLSX, JSON, XML, REST API)</li>
+                        <li>Описываю алгоритмы валидации, фильтрации, логирования</li>
+                    </ul>
+                </div>
+                <div class="service-card">
+                    <h3>📐 XSD-схемы для XML-обменов</h3>
+                    <ul>
+                        <li>Разрабатываю XSD-схемы версии 3.2</li>
+                        <li>Аннотации с маппингом на реквизиты 1С</li>
+                        <li>Формальный контракт для WMS и корпоративных шин</li>
+                    </ul>
+                </div>
+                <div class="service-card">
+                    <h3>🔗 Архитектура интеграций</h3>
+                    <ul>
+                        <li>Проектирую обмены между 1С:ERP и внешними системами</li>
+                        <li>Контролирую реализацию (по желанию)</li>
+                        <li>Работаю в связке с разработчиками 1С — готовый «чертёж» без переделок</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ТИПОВЫЕ ПОТОКИ ===== -->
+    <section id="cases" style="background: rgba(10, 25, 47, 0.5);">
+        <div class="container">
+            <h2 class="section-title">Типовые потоки интеграций</h2>
+            <div class="cases-grid">
+
+                <div class="case-card">
+                    <div class="case-title">1.1 Выгрузка номенклатуры и цен из 1С:ERP в Excel</div>
+                    <div class="case-meta">XLSX · 1С → файл формата XLSX</div>
+                    <p class="case-desc">Срез последних на дату, маппинг 15 полей</p>
+                </div>
+
+                <div class="case-card">
+                    <div class="case-title">1.2 Загрузка номенклатуры поставщиков из Excel в 1С:ERP</div>
+                    <div class="case-meta">XLSX · файл формата XLSX → 1С</div>
+                    <p class="case-desc">Уникальность артикул+поставщик, протокол ошибок</p>
+                </div>
+
+                <div class="case-card">
+                    <div class="case-title">2.1 Загрузка заказов из CRM в 1С:ERP</div>
+                    <div class="case-meta">JSON · REST GET</div>
+                    <p class="case-desc">Проверка контрагентов, расчёт варианта обеспечения</p>
+                </div>
+
+                <div class="case-card">
+                    <div class="case-title">2.2 Выгрузка РТУ из 1С:ERP в WMS/шину (JSON)</div>
+                    <div class="case-meta">JSON · REST POST</div>
+                    <p class="case-desc">
+                        <strong>ТЗ:</strong> Выгрузка документа «Реализация товаров и услуг» в формате JSON через REST API (POST) в корпоративную шину / WMS.<br />
+                        <em>Ключевые решения:</em> построчный признак отправки, Basic auth, повторы при ошибках.
+                    </p>
+                </div>
+
+                <div class="case-card">
+                    <div class="case-title">3.1 Загрузка контрагентов из CRM в 1С:ERP (XML)</div>
+                    <div class="case-meta">XML · REST POST</div>
+                    <p class="case-desc">
+                        <strong>ТЗ:</strong> Загрузка справочника «Контрагенты» из XML-сообщений через REST API (POST) от CRM.<br />
+                        <em>Ключевые решения:</em> валидация ИНН, создание/обновление по ключу, детальный XML-ответ, Basic auth.
+                    </p>
+                </div>
+
+                <div class="case-card">
+                    <div class="case-title">3.2 Выгрузка РТУ из 1С:ERP в WMS/шину (XML + XSD)</div>
+                    <div class="case-meta">XML · REST POST</div>
+                    <p class="case-desc">
+                        <strong>ТЗ:</strong> Выгрузка документа «Реализация товаров и услуг» в формате XML с XSD-схемой версии 3.2 через REST API (POST) в корпоративную шину / WMS.<br />
+                        <em>Ключевые решения:</em> XSD-схема 3.2, построчный признак отправки, регламентное задание.
+                    </p>
+                </div>
+
+            </div>
+
+            <!-- Блок запроса примеров -->
+            <div class="request-block">
+                <p>📄 Полные примеры ТЗ на разработку каждого из этих потоков интеграции — вышлю по запросу.</p>
+                <a href="#contacts" class="btn-primary">Запросить примеры ТЗ</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ПРЕИМУЩЕСТВА ===== -->
+    <section id="benefits">
+        <div class="container">
+            <h2 class="section-title">Что вы получаете, заказывая ТЗ у меня</h2>
+            <div class="benefits-list">
+                <div class="item"><span class="icon">✓</span> Предсказуемый бюджет — разработчик оценивает по готовому ТЗ</div>
+                <div class="item"><span class="icon">✓</span> Сокращение сроков на 30–50 % — без постоянных уточнений</div>
+                <div class="item"><span class="icon">✓</span> Исключение переделок — всё согласовано до старта кодинга</div>
+                <div class="item"><span class="icon">✓</span> Документ в собственность — для аудита или смены исполнителя</div>
+                <div class="item"><span class="icon">✓</span> Чёткое разделение ролей — я готовлю ТЗ, разработчик пишет код</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ТЕХНОЛОГИЧЕСКИЙ СТЕК ===== -->
+    <section style="background: rgba(10, 25, 47, 0.5);">
+        <div class="container">
+            <h2 class="section-title">С чем работаю</h2>
+            <div class="tech-stack">
+                <span>1С:ERP</span>
+                <span>УТ</span>
+                <span>КА</span>
+                <span>XLSX</span>
+                <span>JSON</span>
+                <span>XML</span>
+                <span>REST API</span>
+                <span>Basic Auth</span>
+                <span>ПВХ-константы</span>
+                <span>Внешние обработки</span>
+                <span>Регламентные задания</span>
+                <span>HTTP-сервисы</span>
+                <span>Журнал регистрации</span>
+                <span>XSD-схемы версии 3.2</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ОБО МНЕ ===== -->
+    <section>
+        <div class="container">
+            <h2 class="section-title">Обо мне</h2>
+            <div class="about-text">
+                <p><strong>Бизнес-аналитик / архитектор интеграций 1С</strong></p>
+                <p>Опыт работы с 1С с 2009 года. Десятки спроектированных интеграций, в том числе сложных — с REST API, XML, JSON, XSD.</p>
+                <p style="margin-top: 12px;"><strong>Не пишу код.</strong> Создаю ТЗ, по которым разработчики пишут код с первого раза.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ФУТЕР ===== -->
+    <footer id="contacts">
+        <div class="container">
+            <h2>Свяжитесь со мной</h2>
+            <div class="contacts">
+                <a href="https://t.me/AndriyanovI" target="_blank">📱 Telegram: @AndriyanovI</a>
+                <a href="https://wa.me/375296437205" target="_blank">📞 WhatsApp: +375 29 6437205</a>
+                <a href="mailto:andriyanov@mail.ru">✉️ Email: andriyanov@mail.ru</a>
+            </div>
+            <a href="https://t.me/AndriyanovI" target="_blank" class="btn-primary">Написать в Telegram</a>
+            <div class="footer-copy">
+                © 2026 Игорь Андриянов. Все права защищены.
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
